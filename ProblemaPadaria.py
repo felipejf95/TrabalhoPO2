@@ -50,7 +50,7 @@ for j in J:                                                         # para cada 
             m.addConstr(P[i,j,k] <= C)                              # restrição do estoque máximo
             
             if k < j+3 and k >= j:                                  # se o dia do estoque estiver dentro da janela de produção (3 dias)
-                    m.addConstr(X[i,j] - (D[j]-P[i,j,k]) <= 300)    # restrição do estoque máximo durante a janela de produção
+                    m.addConstr(X[i,j] - (D[j]-P[i,j,k]) <= C)    # restrição do estoque máximo durante a janela de produção
                     
                     
 # Define a função objetivo
