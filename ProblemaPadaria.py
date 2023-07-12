@@ -10,9 +10,9 @@ J = range(0, 6) # Dia da semana - produção
 T = range(0, 4) # Janela de produção
 K = range(0, 6) # Dia da semana - estoque
 
-X = m.addVars(I, J, vtype=GRB.CONTINUOUS, name="X")         # quantida de paes produzidos
-E = m.addVars(I, J, vtype=GRB.CONTINUOUS, name="E")         # excedente de paes
-P = m.addVars(I, J, K, vtype=GRB.CONTINUOUS, name="P")      # estoque de paes
+X = m.addVars(I, J, lb = 0, vtype=GRB.CONTINUOUS, name="X")         # quantida de paes produzidos
+E = m.addVars(I, J, lb = 0, vtype=GRB.CONTINUOUS, name="E")         # excedente de paes
+P = m.addVars(I, J, K, lb = 0, vtype=GRB.CONTINUOUS, name="P")      # estoque de paes
 
 
 # Dados
@@ -40,7 +40,7 @@ for j in J:                                                         # para cada 
     
     for i in I:                                                     # para cada tipo de pao
         for k in K:                                                 # para cada dia da semana (estoque)
-            if k >= j:                                              # se o dia do estoque for maior ou igual ao dia da produção
+            if k > j:                                              # se o dia do estoque for maior ou igual ao dia da produção
                 if k == j:                                          # se for o mesmo dia da produção
                     m.addConstr(P[i,j,k] == E[i,j])                 # o estoque é igual ao excedente da produção
             else:
